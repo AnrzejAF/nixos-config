@@ -48,15 +48,28 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-gpu-tools
+      intel-media-driver
+      intel-compute-runtime-legacy1
+      intel-vaapi-driver
+    ];
+  };
+
+  programs.zsh.enable = true;
 
   users.users.anrzej = {
     isNormalUser = true;
     description = "anrzej";
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
   };
 
   environment.systemPackages = with pkgs; [
-    wget git vscode flatpak telegram-desktop firefox
+    wget firefox zsh
   ];
 
   system.stateVersion = "25.05";

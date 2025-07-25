@@ -31,6 +31,14 @@
 
   home.packages = with pkgs; [
     kdePackages.kate
+    wget
+    git
+    brave
     htop
+    telegram-desktop
+    vscode 
+    flatpak
+    zsh
+    stow
   ];
 }

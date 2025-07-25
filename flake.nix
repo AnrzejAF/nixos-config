@@ -28,7 +28,7 @@
         };
 
         modules = [
-          ./hardware-configuration.nix
+          ./hosts/hardware-configuration.nix
           ./hosts/anrzej-nix.nix
           home-manager.nixosModules.home-manager
           {
