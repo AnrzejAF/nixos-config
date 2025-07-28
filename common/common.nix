@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, flatpaks, ... }:
 
 {
-  imports = [ ];
+  imports = [ flatpaks.nixosModule ];
 
+  nixpkgs.config.allowUnfree = true;
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -48,7 +50,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -59,18 +61,33 @@
     ];
   };
 
-  programs.zsh.enable = true;
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    git
+    vim
+    htop
+    unzip
+    file
+  ];
 
-  users.users.anrzej = {
-    isNormalUser = true;
-    description = "anrzej";
-    extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.zsh;
+  services.flatpak = {
+      enable = true;
+      remotes = { "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo"; };
+      packages = [
+          "flathub:app/app.zen_browser.zen//stable"
+          "flathub:app/org.telegram.desktop//stable"
+          "flathub:app/org.deskflow.deskflow//stable"
+      ];
+      onCalendar = "daily";
   };
 
-  environment.systemPackages = with pkgs; [
-    wget firefox zsh
-  ];
+  hardware.i2c.enable = true; # Needed for ddcutil
+  hardware.bluetooth.enable = true;
+  hardware.logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+  };
 
   system.stateVersion = "25.05";
 }
