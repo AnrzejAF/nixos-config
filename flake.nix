@@ -1,11 +1,11 @@
 {
-  description = "NixOS configuration without Home Manager";
+  description = "Anrzej NixOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/stable-v3";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -33,7 +33,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.anrzej = import ./home/anrzej/home.nix;
+            home-manager.users.anrzej = import ./home/home.nix;
           }
         ];
 

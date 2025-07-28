@@ -69,13 +69,9 @@
     htop
     unzip
     file
+    tree
   ];
-
-  programs.ssh = {
-    enable = true;
-    forwardAgent = true;
-  };
-
+  
   services.flatpak = {
       enable = true;
       remotes = { "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo"; };
