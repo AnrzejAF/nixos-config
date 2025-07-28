@@ -5,9 +5,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/stable-v3";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
@@ -25,6 +27,14 @@
           ./hosts/hardware-configuration.nix
           ./common/common.nix
           ./hosts/anrzej-user.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.anrzej = import ./home/anrzej/home.nix;
+          }
         ];
 
         specialArgs = { flatpaks = inputs.flatpaks; };
