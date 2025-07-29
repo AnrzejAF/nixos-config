@@ -17,8 +17,9 @@ nix_cleanup() {
 }
 
 nix_full_update() {
-  nix_flake_meta
+  nix_flake_update
   nix_rebuild
+  nix_cleanup
 }
 
 nix_run() {
