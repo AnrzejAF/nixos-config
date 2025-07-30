@@ -5,6 +5,9 @@
 
   programs.ssh = {
     enable = true;
-    forwardAgent = true;
+    addKeysToAgent = "yes";
+    extraConfig = ''
+      IdentityFile ~/.ssh/nix_anrzej_t490
+    '';
   };
 }

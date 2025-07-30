@@ -1,11 +1,19 @@
-{ config, pkgs, flatpaks, ... }:
+{
+  config,
+  pkgs,
+  flatpaks,
+  ...
+}:
 
 {
   imports = [ flatpaks.nixosModule ];
 
   nixpkgs.config.allowUnfree = true;
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -71,23 +79,25 @@
     file
     tree
   ];
-  
+
   services.flatpak = {
-      enable = true;
-      remotes = { "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo"; };
-      packages = [
-          "flathub:app/app.zen_browser.zen//stable"
-          "flathub:app/org.telegram.desktop//stable"
-          "flathub:app/org.deskflow.deskflow//stable"
-      ];
-      onCalendar = "daily";
+    enable = true;
+    remotes = {
+      "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    };
+    packages = [
+      "flathub:app/app.zen_browser.zen//stable"
+      "flathub:app/org.telegram.desktop//stable"
+      "flathub:app/org.deskflow.deskflow//stable"
+    ];
+    onCalendar = "daily";
   };
 
   hardware.i2c.enable = true; # Needed for ddcutil
   hardware.bluetooth.enable = true;
   hardware.logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
+    enable = true;
+    enableGraphical = true;
   };
 
   system.stateVersion = "25.05";

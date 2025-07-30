@@ -9,17 +9,27 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      flake-utils,
+      home-manager,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
-      in {
+      in
+      {
         formatter = pkgs.nixpkgs-fmt;
       }
-    ) // {
+    )
+    // {
       nixosConfigurations.anrzej-nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
@@ -37,7 +47,9 @@
           }
         ];
 
-        specialArgs = { flatpaks = inputs.flatpaks; };
+        specialArgs = {
+          flatpaks = inputs.flatpaks;
+        };
       };
     };
 }
