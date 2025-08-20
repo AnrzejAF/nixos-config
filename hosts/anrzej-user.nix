@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  
+  nix.settings.trusted-users = [ "root" "anrzej" ];
+
   users.users.anrzej = {
     isNormalUser = true;
     description = "anrzej";
@@ -14,16 +17,53 @@
     shell = pkgs.zsh;
 
     packages = with pkgs; [
+      # kde packages
       kdePackages.kate
+      kdePackages.krfb
+
+      # editor
       vscode
-      brave
       stow
+
+      # browser
+      brave
 
       # nix formatter and linter
       nil
       nixfmt-rfc-style
+
+      # CAD and 3D
+      freecad
+      orca-slicer
+
+      # latex
+      texliveFull
+      corefonts
+
+      # vpn
+      protonvpn-gui
+
+      # development
+      nodejs_24
+      devenv
+
+      # streaming
+      stremio
+      yt-dlp
+
+      # player
+      mpv
+      ffmpeg
+
+      # xorg 
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXrandr
+      xorg.libXi
     ];
   };
+
+  programs.kdeconnect.enable = true;
 
   programs.zsh.enable = true;
 
