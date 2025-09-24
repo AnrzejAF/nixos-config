@@ -1,5 +1,11 @@
 nix_rebuild() {
-  sudo nixos-rebuild switch --flake '.#anrzej-nix'
+  if [ -z "$1" ]; then
+    echo "Usage: nix_rebuild <hostname>"
+    return 1
+  fi
+
+  local hostname="$1"
+  sudo nixos-rebuild switch --flake ".#${hostname}"
 }
 
 nix_flake_update() {

@@ -161,7 +161,7 @@ nix flake check
 sudo nixos-rebuild build --flake .#anrzej-t490
 
 # Pokaż różnice
-nixos-rebuild build --flake .#anrzej-t490 && nix diff-closures /run/current-system result
+nixos-rebuild build --flake .#anrzej-t490 
 
 # Aktualizuj flake inputs
 nix flake update
