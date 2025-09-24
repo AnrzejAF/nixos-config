@@ -30,25 +30,56 @@
       }
     )
     // {
-      nixosConfigurations.anrzej-nix = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations = {
+        # T490 configuration (current machine)
+        anrzej-t490 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/t490
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.anrzej = import ./home/home.nix;
+            }
+          ];
+          specialArgs = {
+            flatpaks = inputs.flatpaks;
+          };
+        };
 
-        modules = [
-          ./hosts/hardware-configuration.nix
-          ./common/common.nix
-          ./hosts/anrzej-user.nix
+        # P14s configuration
+        anrzej-p14s = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/p14s
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.anrzej = import ./home/home.nix;
+            }
+          ];
+          specialArgs = {
+            flatpaks = inputs.flatpaks;
+          };
+        };
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.anrzej = import ./home/home.nix;
-          }
-        ];
-
-        specialArgs = {
-          flatpaks = inputs.flatpaks;
+        # Server configuration
+        anrzej-server = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/server
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.anrzej = import ./home/home.nix;
+            }
+          ];
+          specialArgs = {
+            flatpaks = inputs.flatpaks;
+          };
         };
       };
     };

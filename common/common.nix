@@ -18,7 +18,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "anrzej-nix";
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;
 
