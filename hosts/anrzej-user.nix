@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  
-  nix.settings.trusted-users = [ "root" "anrzej" ];
+
+  nix.settings.trusted-users = [
+    "root"
+    "anrzej"
+  ];
 
   users.users.anrzej = {
     isNormalUser = true;
@@ -12,6 +15,7 @@
       "wheel"
       "dialout"
       "docker"
+      "plugdev"
     ];
 
     shell = pkgs.zsh;
@@ -55,18 +59,50 @@
       mpv
       ffmpeg
 
-      # xorg 
+      # xorg
       xorg.libX11
       xorg.libXcursor
       xorg.libXrandr
       xorg.libXi
+      xorg.xhost
+
+      # steam
+      protonup-qt
+
+      libsndfile
+      libsamplerate
+      SDL2
+      SDL2_mixer
+      timidity
+
+      zlib
+
+      ultrastardx
+
+      qbittorrent
+
+      wine
+
+      nmap
+
+      duf
+
+      btop
+
+      usbutils
     ];
   };
 
+  programs.nix-ld.enable = true;
+
   programs.kdeconnect.enable = true;
 
-  programs.zsh.enable = true;
+  programs.steam.enable = true;
 
+  virtualisation.docker.enable = true;
+
+  programs.zsh.enable = true;
+  hardware.graphics.enable = true;
   programs.ssh = {
     startAgent = true;
     extraConfig = ''

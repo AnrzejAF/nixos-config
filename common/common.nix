@@ -50,6 +50,8 @@
 
   services.printing.enable = true;
 
+  programs.xwayland.enable = true;
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -59,6 +61,11 @@
     pulse.enable = true;
   };
 
+  # Luxonis udev rules for camera
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="03e7", ATTR{idProduct}=="f63b", MODE="0666", GROUP="plugdev"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="03e7", ATTR{idProduct}=="2485", MODE="0666", GROUP="plugdev"
+  '';
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -73,8 +80,8 @@
     wget
     curl
     git
-    vim
-    htop
+    nano
+    btop
     unzip
     file
     tree
