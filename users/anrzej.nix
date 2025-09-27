@@ -89,6 +89,9 @@
       btop
 
       usbutils
+      findutils
+
+      cachix
     ];
   };
 

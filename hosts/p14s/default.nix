@@ -1,4 +1,4 @@
-{ ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -8,8 +8,23 @@
   ];
 
   networking.hostName = "anrzej-p14s";
-  
-  # P14s-specific configuration
-  # Example: different graphics drivers, power management, etc.
-  # This will be customized based on P14s hardware
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    open = true;
+    prime = {
+      sync.enable = true;
+      intelBusId  = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  environment.systemPackages = with pkgs; [
+    cudatoolkit
+  ];
 }
