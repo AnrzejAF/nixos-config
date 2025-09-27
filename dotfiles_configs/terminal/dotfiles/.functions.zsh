@@ -23,7 +23,13 @@ nix_cleanup() {
 }
 
 nix_full_update() {
-  nix_flake_update
+  if [ -z "$1" ]; then
+    echo "Usage: nix_rebuild <hostname>"
+    return 1
+  fi
+
+  local hostname="$1"
+  nix_flake_update $hostname
   nix_rebuild
   nix_cleanup
 }
