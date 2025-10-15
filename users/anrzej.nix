@@ -1,14 +1,20 @@
 { pkgs, ... }:
 
 {
+  # Nix settings
   nix.settings.trusted-users = [
     "root"
     "anrzej"
   ];
 
+  # User groups
+  users.groups.plugdev = { };
+
+  # User configuration
   users.users.anrzej = {
     isNormalUser = true;
     description = "anrzej";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -17,91 +23,87 @@
       "plugdev"
     ];
 
-    shell = pkgs.zsh;
-
     packages = with pkgs; [
-      # kde packages
-      kdePackages.kate
-      kdePackages.krfb
-
-      # editor
+      # Development tools
       vscode
-      stow
-
-      # browser
-      brave
-
-      # nix formatter and linter
+      nodejs_24
+      devenv
       nil
       nixfmt-rfc-style
+      git
+      stow
+      cachix
+      inkscape
 
-      # CAD and 3D
+      # Desktop applications
+      brave
+      kdePackages.kate
+      kdePackages.krfb
+      protonvpn-gui
+
+      # Media and entertainment
+      mpv
+      ffmpeg
+      stremio
+      yt-dlp
+      qbittorrent
+      heroic
+      ultrastardx
+
+      # CAD and 3D printing
       freecad
       orca-slicer
 
-      # latex
+      # LaTeX and documentation
       texliveFull
       corefonts
 
-      # vpn
-      protonvpn-gui
-
-      # development
-      nodejs_24
-      devenv
-
-      # streaming
-      stremio
-      yt-dlp
-
-      # player
-      mpv
-      ffmpeg
-
-      # xorg
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXi
-      xorg.xhost
-
-      # steam
+      # Gaming
       protonup-qt
+      wine
 
+      # System utilities
+      btop
+      duf
+      nmap
+      usbutils
+      findutils
+
+      # network
+      zerotierone
+
+      # Audio libraries
       libsndfile
       libsamplerate
       SDL2
       SDL2_mixer
       timidity
 
+      # X11 libraries
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXrandr
+      xorg.libXi
+      xorg.xhost
+
+      # Other libraries
       zlib
-
-      ultrastardx
-
-      qbittorrent
-
-      wine
-
-      nmap
-
-      duf
-
-      btop
-
-      usbutils
-      findutils
-
-      cachix
     ];
   };
 
+  # System programs and services
   programs.nix-ld.enable = true;
   programs.kdeconnect.enable = true;
   programs.steam.enable = true;
-  virtualisation.docker.enable = true;
   programs.zsh.enable = true;
-  hardware.graphics.enable = true;
   
+  # Hardware
+  hardware.graphics.enable = true;
+
+  # Virtualization
+  virtualisation.docker.enable = true;
+
+  # SSH configuration
   programs.ssh = {
     startAgent = true;
     extraConfig = ''
@@ -109,6 +111,7 @@
     '';
   };
 
+  # Git configuration
   programs.git = {
     enable = true;
     config = {

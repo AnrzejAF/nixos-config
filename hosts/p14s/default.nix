@@ -15,7 +15,7 @@
     open = true;
     prime = {
       sync.enable = true;
-      intelBusId  = "PCI:0:2:0";
+      intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
     modesetting.enable = true;
@@ -24,7 +24,20 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  hardware.nvidia-container-toolkit.enable = true;
+
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker_25; 
+    daemon.settings = {
+      features = {
+        cdi = true;
+      };
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     cudatoolkit
+    efitools
   ];
 }

@@ -4,7 +4,12 @@
   flatpaks,
   ...
 }:
-
+let
+  secretsPath = ../secrets/secrets.nix;
+  secrets = if builtins.pathExists secretsPath 
+    then import secretsPath
+    else { zerotier.networkId = ""; };
+in
 {
   imports = [ flatpaks.nixosModule ];
 
@@ -95,6 +100,7 @@
       "flathub:app/app.zen_browser.zen//stable"
       "flathub:app/org.telegram.desktop//stable"
       "flathub:app/org.deskflow.deskflow//stable"
+      "flathub:app/com.usebottles.bottles//stable"
     ];
     onCalendar = "daily";
   };
@@ -105,6 +111,11 @@
     enable = true;
     enableGraphical = true;
   };
+
+  services.zerotierone = {
+  enable = true;
+  joinNetworks = [ secrets.zerotier.networkId ];
+};
 
   system.stateVersion = "25.05";
 }
