@@ -43,10 +43,10 @@
 
   services.thermald.enable = true;
 
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
 
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -69,4 +69,6 @@
   services.logind.lidSwitchExternalPower = "hibernate";
   services.logind.lidSwitchDocked = "ignore";
 
+  # Enable energy savings during sleep
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
 }

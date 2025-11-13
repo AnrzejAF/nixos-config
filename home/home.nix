@@ -3,9 +3,16 @@
 {
   home.stateVersion = "25.05";
 
-  imports = [
-    <plasma-manager/modules>
-  ];
+  programs.ssh = {
+      enable = true;
+    matchBlocks = {
+      "anrzej_oracle" = {
+        hostname = "130.162.234.37";
+        user = "ubuntu";
+        identityFile = [ "~/.ssh/ssh-key-2025-11-10.key" ];
+      };
+    };
+  };
 
   programs.plasma = {
     enable = true;

@@ -7,6 +7,8 @@
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.url = "github:pjones/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -57,7 +59,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              # home-manager.users.anrzej = import ./home/home.nix;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.anrzej = {
+                imports = [
+                  inputs.plasma-manager.homeManagerModules.plasma-manager
+                  ./home/home.nix
+                ];
+              };
             }
           ];
           specialArgs = {
