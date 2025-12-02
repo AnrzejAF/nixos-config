@@ -1,0 +1,3 @@
+[submodule "dotfiles_configs/dotfiles"]
+	path = dotfiles_configs/dotfiles
+	url = https://github.com/AnrzejAF/dotfiles
