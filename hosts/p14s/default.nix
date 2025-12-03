@@ -9,6 +9,8 @@
 
   networking.hostName = "anrzej-p14s";
 
+  hardware.enableAllFirmware = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
