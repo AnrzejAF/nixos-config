@@ -26,10 +26,4 @@
 
   # Conservative kernel param copied from p14s for consistent sleep policy
   boot.kernelParams = [ "mem_sleep_default=deep" ];
-
-  # Keep a minimal set of system packages for a server host
-  environment.systemPackages = with pkgs; [ htop tmux ];
-
-  # No X11 / GPU / thermald / desktop-specific services here — server should be
-  # lean. Other settings can be added later if needed.
 }
