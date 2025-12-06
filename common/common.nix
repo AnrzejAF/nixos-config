@@ -6,9 +6,8 @@
 }:
 let
   secretsPath = ../secrets/secrets.nix;
-  secrets = if builtins.pathExists secretsPath 
-    then import secretsPath
-    else { zerotier.networkId = ""; };
+  secrets =
+    if builtins.pathExists secretsPath then import secretsPath else { zerotier.networkId = ""; };
 in
 {
   imports = [ flatpaks.nixosModule ];
@@ -113,9 +112,10 @@ in
   };
 
   services.zerotierone = {
-  enable = true;
-  joinNetworks = [ secrets.zerotier.networkId ];
-};
+    enable = true;
+    port = 9993;
+    joinNetworks = [ secrets.zerotier.networkId ];
+  };
 
   system.stateVersion = "25.05";
 }

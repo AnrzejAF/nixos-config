@@ -69,9 +69,6 @@
       usbutils
       findutils
 
-      # network
-      zerotierone
-
       # Audio libraries
       libsndfile
       libsamplerate
@@ -96,7 +93,7 @@
   programs.kdeconnect.enable = true;
   programs.steam.enable = true;
   programs.zsh.enable = true;
-  
+
   # Hardware
   hardware.graphics.enable = true;
 
