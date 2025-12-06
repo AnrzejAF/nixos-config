@@ -74,15 +74,20 @@
         };
 
         # Server configuration
-        anrzej-server = nixpkgs.lib.nixosSystem {
+        anrzej-serwer = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/server
+            ./hosts/serwer
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.anrzej = import ./home/home.nix;
+              home-manager.users.anrzej-serwer= {
+                imports = [
+                  inputs.plasma-manager.homeManagerModules.plasma-manager
+                  ./home/home.nix
+                ];
+              };
             }
           ];
           specialArgs = {
