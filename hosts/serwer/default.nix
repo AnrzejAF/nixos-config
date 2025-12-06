@@ -4,14 +4,11 @@
   imports = [
     ./hardware-configuration.nix
     ../../common/common.nix
-    ../../users/serwer.nix
+    ../../users/anrzej-serwer.nix
   ];
 
-  networking.hostName = "anrzej-server";
+  networking.hostName = "anrzej-serwer";
 
-  # Keep firmware and container tooling like on p14s, but avoid desktop and
-  # developer-specific packages. The user is separate and lighter (see
-  # ../../users/serwer.nix).
   hardware.enableAllFirmware = true;
 
   virtualisation.docker = {
