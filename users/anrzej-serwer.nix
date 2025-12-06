@@ -4,8 +4,23 @@
   # User
   users.users.anrzej-serwer = {
     isNormalUser = true;
+    shell = pkgs.zsh;
+    description = "anrzej";
+
     extraGroups = [ "wheel" "networkmanager" "docker" ];
-    packages = with pkgs; [ htop tmux openssh vscode brave stremio git zerotierone];
+
+    packages = with pkgs; [
+      btop 
+      tmux 
+      openssh 
+      vscode 
+      brave 
+      stremio 
+      git 
+      zerotierone
+      ultrastardx
+      stremio
+    ];
   };
 
   # Open SSH port in the firewall
@@ -25,13 +40,10 @@
 
   services.zerotierone.enable = true;
 
-
   # Enable full GUI
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-
- # services.vscode-server.enable = true;
 
   # Flatpak portals for GUI apps
   xdg.portal.enable = true;
