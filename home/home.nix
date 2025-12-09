@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
 #  imports = [
 #    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"

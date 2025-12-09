@@ -44,7 +44,7 @@
       # Media and entertainment
       mpv
       ffmpeg
-      stremio
+      # stremio
       yt-dlp
       qbittorrent
       heroic
@@ -59,7 +59,7 @@
       corefonts
 
       # Gaming
-      protonup-qt
+      # protonup-qt
       wine
 
       # System utilities
@@ -87,6 +87,8 @@
       zlib
     ];
   };
+
+  programs.partition-manager.enable = true;
 
   # System programs and services
   programs.nix-ld.enable = true;
