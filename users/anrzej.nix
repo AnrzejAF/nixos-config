@@ -10,6 +10,12 @@
   # User groups
   users.groups.plugdev = { };
 
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "org.deskflow.deskflow"
+    "com.stremio.Stremio"
+  ];
+  
   # User configuration
   users.users.anrzej = {
     isNormalUser = true;

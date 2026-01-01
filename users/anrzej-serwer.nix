@@ -40,6 +40,12 @@
   ];
 
   programs.nix-ld.enable = true;
+
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "org.deskflow.deskflow"
+    "com.stremio.Stremio"
+  ];
   
 # Headless tools (still useful)
   programs.zsh.enable = true;

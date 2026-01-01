@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  flatpaks,
   ...
 }:
 let
@@ -10,8 +9,6 @@ let
     if builtins.pathExists secretsPath then import secretsPath else { zerotier.networkId = ""; };
 in
 {
-  imports = [ flatpaks.nixosModule ];
-
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
@@ -88,19 +85,6 @@ in
     tree
   ];
 
-  services.flatpak = {
-    enable = true;
-    remotes = {
-      "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-    };
-    packages = [
-      "flathub:app/app.zen_browser.zen//stable"
-      "flathub:app/org.telegram.desktop//stable"
-      "flathub:app/org.deskflow.deskflow//stable"
-      "flathub:app/com.usebottles.bottles//stable"
-    ];
-    onCalendar = "daily";
-  };
 
   hardware.i2c.enable = true; # Needed for ddcutil
   hardware.bluetooth.enable = true;
