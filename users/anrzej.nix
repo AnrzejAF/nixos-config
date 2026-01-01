@@ -122,7 +122,7 @@
     config = {
       user.name = "Anrzej";
       user.email = "andrzejfijalo@gmail.com";
-      init.defaultBranch = "main";
+      init.defaultBranch = "master";
       core.editor = "nano";
       color.ui = "auto";
       pull.rebase = true;
