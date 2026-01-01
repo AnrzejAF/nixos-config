@@ -50,9 +50,7 @@ in
   };
 
   console.keyMap = "pl2";
-
-  services.printing.enable = true;
-
+  
   programs.xwayland.enable = true;
 
   services.pulseaudio.enable = false;
@@ -115,6 +113,14 @@ in
     enable = true;
     port = 9993;
     joinNetworks = [ secrets.zerotier.networkId ];
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = [
+      pkgs.gutenprint
+      pkgs.hplip
+    ];
   };
 
   system.stateVersion = "25.11";
