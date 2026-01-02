@@ -33,7 +33,7 @@
               home-manager.backupFileExtension = "backup";
               home-manager.users.anrzej = {
                 imports = [
-                  inputs.plasma-manager.homeManagerModules.plasma-manager
+                  inputs.plasma-manager.homeModules.plasma-manager
                   ./home/home.nix
                 ];
               };
@@ -53,7 +53,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.anrzej-serwer= {
                 imports = [
-                  inputs.plasma-manager.homeManagerModules.plasma-manager
+                  inputs.plasma-manager.homeModules.plasma-manager
                   ./home/home.nix
                 ];
               };

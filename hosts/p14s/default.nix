@@ -21,7 +21,6 @@
       nvidiaBusId = "PCI:1:0:0";
     };
     modesetting.enable = true;
-    powerManagement.enable = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -42,14 +41,16 @@
     cudatoolkit
     efitools
   ];
+  
+  powerManagement.enable = true;
 
   services.thermald.enable = true;
 
   services.power-profiles-daemon.enable = true;
 
-  services.logind.lidSwitch = "hibernate";
-  services.logind.lidSwitchExternalPower = "hibernate";
-  services.logind.lidSwitchDocked = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "hibernate";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "hibernate";
+  services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
 
   # Enable energy savings during sleep
   boot.kernelParams = [ "mem_sleep_default=deep" ];
